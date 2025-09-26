@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PollPay Survey</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #e0e0e0;
+            margin-bottom: 20px;
+        }
+        
+        .time {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .logo {
+            font-weight: bold;
+            font-size: 18px;
+            color: #3a86ff;
+        }
+        
+        .network {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .app-title {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .app-title h1 {
+            font-size: 24px;
+            color: #3a86ff;
+            margin-bottom: 5px;
+        }
+        
+        .app-title p {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+        }
+        
+        .nav-btn {
+            flex: 1;
+            margin: 0 10px;
+            padding: 12px;
+            background: white;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: #3a86ff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        .nav-btn i {
+            margin-right: 8px;
+        }
+        
+        .section-title {
+            font-size: 16px;
+            margin: 25px 0 15px;
+            color: #444;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title i {
+            margin-right: 10px;
+            color: #3a86ff;
+        }
+        
+        .surveys-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .survey-card {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        
+        .survey-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .survey-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .survey-title {
+            font-weight: 600;
+            font-size: 16px;
+            color: #333;
+        }
+        
+        .survey-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .survey-details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .survey-payout {
+            font-weight: 600;
+            color: #4CAF50;
+        }
+        
+        .start-btn {
+            width: 100%;
+            padding: 10px;
+            background: #3a86ff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .start-btn:hover {
+            background: #2a75ef;
+        }
+        
+        .start-btn.completed {
+            background: #4CAF50;
+            cursor: default;
+        }
+        
+        .start-btn.completed:hover {
+            background: #4CAF50;
+        }
+        
+        .start-btn.locked {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .completed-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #4CAF50;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            color: #888;
+            font-size: 14px;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 25px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #aaa;
+        }
+        
+        .close-modal:hover {
+            color: #333;
+        }
+        
+        .modal-header {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .modal-title {
+            font-size: 22px;
+            color: #3a86ff;
+            margin-bottom: 5px;
+        }
+        
+        .modal-subtitle {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .question-container {
+            margin-bottom: 25px;
+        }
+        
+        .question-text {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .option {
+            padding: 12px 15px;
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .option:hover {
+            background: #e9ecef;
+            border-color: #3a86ff;
+        }
+        
+        .option.selected {
+            background: #d1ecf1;
+            border-color: #3a86ff;
+            color: #0c5460;
+        }
+        
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+        
+        .nav-button {
+            padding: 10px 20px;
+            background: #3a86ff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .nav-button:hover {
+            background: #2a75ef;
+        }
+        
+        .nav-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .progress-bar {
+            height: 6px;
+            background: #e0e0e0;
+            border-radius: 3px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: #3a86ff;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .completion-screen {
+            text-align: center;
+            padding: 30px 0;
+        }
+        
+        .completion-icon {
+            font-size: 64px;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+        
+        .completion-message {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .earned-amount {
+            font-size: 32px;
+            font-weight: bold;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+        
+        .account-balance {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            z-index: 100;
+        }
+        
+        .balance-amount {
+            font-weight: bold;
+            color: #4CAF50;
+            margin-left: 5px;
+        }
+        
+        .upgrade-modal {
+            text-align: center;
+        }
+        
+        .upgrade-icon {
+            font-size: 64px;
+            color: #FFD700;
+            margin-bottom: 20px;
+        }
+        
+        .upgrade-title {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .upgrade-text {
+            font-size: 16px;
+            margin-bottom: 25px;
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        .upgrade-features {
+            text-align: left;
+            margin-bottom: 30px;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        
+        .upgrade-features li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .upgrade-features i {
+            color: #4CAF50;
+            margin-right: 10px;
+        }
+        
+        .upgrade-button {
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #FFD700, #FFA000);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(255, 215, 0, 0.3);
+        }
+        
+        .upgrade-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(255, 215, 0, 0.4);
+        }
+        
+        .survey-counter {
+            text-align: center;
+            margin: 15px 0;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        @media (max-width: 600px) {
+            .surveys-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+            }
+            
+            .nav-btn {
+                margin: 5px 0;
+            }
+            
+            .account-balance {
+                position: static;
+                margin-bottom: 15px;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="account-balance">
+            <i class="fas fa-coins" style="color: #FFD700;"></i>
+            Balance: <span class="balance-amount">Ksh <span id="balance">0</span></span>
+        </div>
+        
+        <header>
+            <div class="time" id="current-time">09:28</div>
+            <div class="logo">SY ISIMBA</div>
+            <div class="network">0</div>
+        </header>
+        
+        <div class="app-title">
+            <h1><i class="fas fa-poll"></i> POLLPAY SURVEY</h1>
+            <p>Surveys are automatically filtered based on your location</p>
+        </div>
+        
+        <div class="survey-counter">
+            Surveys completed today: <span id="completed-count">0</span>/3
+        </div>
+        
+        <div class="nav-buttons">
+            <button class="nav-btn"><i class="fas fa-user-circle"></i> View Account</button>
+            <button class="nav-btn"><i class="fas fa-users"></i> Referrals</button>
+        </div>
+        
+        <div class="section-title">
+            <i class="fas fa-clipboard-list"></i> Surveys For You Today
+        </div>
+        
+        <div class="surveys-grid" id="surveys-container">
+            <!-- Survey cards will be generated by JavaScript -->
+        </div>
+        
+        <footer>
+            <p>PollPay &copy; 2023 - Earn money by sharing your opinion</p>
+        </footer>
+    </div>
+
+    <!-- Survey Modal -->
+    <div class="modal" id="survey-modal">
+        <div class="modal-content">
+            <span class="close-modal" id="close-modal">&times;</span>
+            
+            <div class="modal-header">
+                <div class="modal-title" id="modal-title">Survey Title</div>
+                <div class="modal-subtitle" id="modal-subtitle">Complete all questions to earn rewards</div>
+            </div>
+            
+            <div class="progress-bar">
+                <div class="progress" id="progress-bar"></div>
+            </div>
+            
+            <div id="question-screen">
+                <div class="question-container">
+                    <div class="question-text" id="question-text">Question will appear here</div>
+                    <div class="options-container" id="options-container">
+                        <!-- Options will be generated here -->
+                    </div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="nav-button" id="prev-button" disabled>Previous</button>
+                    <button class="nav-button" id="next-button">Next</button>
+                </div>
+            </div>
+            
+            <div id="completion-screen" class="completion-screen" style="display: none;">
+                <div class="completion-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="completion-message">Survey Completed!</div>
+                <div class="earned-amount" id="earned-amount">+Ksh 0</div>
+                <button class="nav-button" id="finish-button">Finish</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upgrade Modal -->
+    <div class="modal" id="upgrade-modal">
+        <div class="modal-content upgrade-modal">
+            <span class="close-modal" id="close-upgrade-modal">&times;</span>
+            
+            <div class="upgrade-icon">
+                <i class="fas fa-crown"></i>
+            </div>
+            
+            <div class="upgrade-title">Upgrade to Premium</div>
+            
+            <div class="upgrade-text">
+                You've completed your 3 free surveys for today. Upgrade to Premium to continue earning!
+            </div>
+            
+            <div class="upgrade-features">
+                <ul>
+                    <li><i class="fas fa-check"></i> Unlimited surveys per day</li>
+                    <li><i class="fas fa-check"></i> Higher payout rates</li>
+                    <li><i class="fas fa-check"></i> Exclusive premium surveys</li>
+                    <li><i class="fas fa-check"></i> Priority customer support</li>
+                    <li><i class="fas fa-check"></i> Early access to new features</li>
+                </ul>
+            </div>
+            
+            <button class="upgrade-button" id="upgrade-button">
+                <i class="fas fa-star"></i> Upgrade Now - Ksh 299/month
+            </button>
+            
+            <div style="margin-top: 15px; font-size: 14px; color: #888;">
+                Cancel anytime • 7-day free trial available
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Survey data with questions
+        const surveys = [
+            {
+                id: 1,
+                title: "INFOTRACK",
+                questions: 14,
+                payout: 59,
+                color: "#FF6B6B",
+                questionsData: [
+                    {
+                        question: "How often do you use online information services?",
+                        options: ["Daily", "Weekly", "Monthly", "Rarely", "Never"]
+                    },
+                    {
+                        question: "Which type of information do you search for most frequently?",
+                        options: ["News", "Educational", "Entertainment", "Business", "Health"]
+                    },
+                    {
+                        question: "How satisfied are you with current information services?",
+                        options: ["Very satisfied", "Satisfied", "Neutral", "Dissatisfied", "Very dissatisfied"]
+                    }
+                ]
+            },
+            {
+                id: 2,
+                title: "TECH GADGETS",
+                questions: 8,
+                payout: 70,
+                color: "#45B7D1",
+                questionsData: [
+                    {
+                        question: "How many tech gadgets do you own?",
+                        options: ["0-2", "3-5", "6-8", "9+"]
+                    },
+                    {
+                        question: "Which gadget do you use most frequently?",
+                        options: ["Smartphone", "Laptop", "Tablet", "Smartwatch", "Other"]
+                    },
+                    {
+                        question: "How important are gadget features to you?",
+                        options: ["Very important", "Important", "Neutral", "Not important"]
+                    }
+                ]
+            },
+            {
+                id: 3,
+                title: "DIGITAL SKILLS",
+                questions: 8,
+                payout: 80,
+                color: "#FECA57",
+                questionsData: [
+                    {
+                        question: "How would you rate your digital skills?",
+                        options: ["Beginner", "Intermediate", "Advanced", "Expert"]
+                    },
+                    {
+                        question: "Which digital skill do you use most often?",
+                        options: ["Email", "Social Media", "Office Software", "Coding", "Design"]
+                    },
+                    {
+                        question: "How important are digital skills in your daily life?",
+                        options: ["Very important", "Important", "Neutral", "Not important"]
+                    }
+                ]
+            },
+            {
+                id: 4,
+                title: "CYBERSECURITY",
+                questions: 8,
+                payout: 85,
+                color: "#54A0FF",
+                questionsData: [
+                    {
+                        question: "How concerned are you about online security?",
+                        options: ["Very concerned", "Concerned", "Neutral", "Not concerned"]
+                    },
+                    {
+                        question: "Which security measures do you use?",
+                        options: ["Antivirus", "VPN", "Two-factor authentication", "Password manager", "None"]
+                    },
+                    {
+                        question: "Have you ever been a victim of cybercrime?",
+                        options: ["Yes", "No", "Not sure"]
+                    }
+                ]
+            },
+            {
+                id: 5,
+                title: "FINTECH",
+                questions: 8,
+                payout: 68,
+                color: "#5F27CD",
+                questionsData: [
+                    {
+                        question: "How often do you use fintech services?",
+                        options: ["Daily", "Weekly", "Monthly", "Rarely", "Never"]
+                    },
+                    {
+                        question: "Which fintech service do you use most?",
+                        options: ["Mobile banking", "Digital payments", "Investment apps", "Loan apps", "Insurance apps"]
+                    },
+                    {
+                        question: "How satisfied are you with current fintech services?",
+                        options: ["Very satisfied", "Satisfied", "Neutral", "Dissatisfied", "Very dissatisfied"]
+                    }
+                ]
+            },
+            {
+                id: 6,
+                title: "AI ADOPTION",
+                questions: 8,
+                payout: 72,
+                color: "#00D2D3",
+                questionsData: [
+                    {
+                        question: "How familiar are you with artificial intelligence?",
+                        options: ["Very familiar", "Somewhat familiar", "Not very familiar", "Not at all familiar"]
+                    },
+                    {
+                        question: "Do you use any AI-powered tools or services?",
+                        options: ["Yes, regularly", "Yes, occasionally", "No, but interested", "No, not interested"]
+                    }
+                ]
+            },
+            {
+                id: 7,
+                title: "SAFARICOM",
+                questions: 13,
+                payout: 80,
+                color: "#EE5A24",
+                questionsData: [
+                    {
+                        question: "How long have you been a Safaricom customer?",
+                        options: ["Less than 1 year", "1-3 years", "3-5 years", "More than 5 years"]
+                    },
+                    {
+                        question: "Which Safaricom service do you use most?",
+                        options: ["Voice calls", "Mobile data", "M-Pesa", "SMS", "Other"]
+                    }
+                ]
+            }
+        ];
+
+        // State management
+        let currentSurvey = null;
+        let currentQuestionIndex = 0;
+        let userAnswers = [];
+        let accountBalance = 0;
+        let completedSurveys = [];
+        let surveysCompletedToday = 0;
+        const MAX_FREE_SURVEYS = 3;
+
+        // DOM elements
+        const surveysContainer = document.getElementById('surveys-container');
+        const surveyModal = document.getElementById('survey-modal');
+        const upgradeModal = document.getElementById('upgrade-modal');
+        const closeModal = document.getElementById('close-modal');
+        const closeUpgradeModal = document.getElementById('close-upgrade-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalSubtitle = document.getElementById('modal-subtitle');
+        const questionText = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const prevButton = document.getElementById('prev-button');
+        const nextButton = document.getElementById('next-button');
+        const progressBar = document.getElementById('progress-bar');
+        const questionScreen = document.getElementById('question-screen');
+        const completionScreen = document.getElementById('completion-screen');
+        const earnedAmount = document.getElementById('earned-amount');
+        const finishButton = document.getElementById('finish-button');
+        const balanceDisplay = document.getElementById('balance');
+        const completedCountDisplay = document.getElementById('completed-count');
+        const upgradeButton = document.getElementById('upgrade-button');
+
+        // Function to generate survey cards
+        function generateSurveyCards() {
+            surveysContainer.innerHTML = '';
+            
+            surveys.forEach((survey, index) => {
+                const card = document.createElement('div');
+                card.className = 'survey-card';
+                
+                // Check if survey is completed
+                const isCompleted = completedSurveys.includes(survey.id);
+                // Check if survey is locked (user has reached free limit and survey is not completed)
+                const isLocked = surveysCompletedToday >= MAX_FREE_SURVEYS && !isCompleted;
+                
+                // Create a simple hash for consistent colors
+                const colorIndex = Math.abs(survey.title.split('').reduce((a, b) => {
+                    a = ((a << 5) - a) + b.charCodeAt(0);
+                    return a & a;
+                }, 0)) % 360;
+                
+                const hue = colorIndex;
+                
+                card.innerHTML = `
+                    ${isCompleted ? '<div class="completed-badge">Completed</div>' : ''}
+                    <div class="survey-header">
+                        <div class="survey-title">${survey.title}</div>
+                        <div class="survey-icon" style="background: hsl(${hue}, 70%, 60%)">
+                            ${survey.title.charAt(0)}
+                        </div>
+                    </div>
+                    <div class="survey-details">
+                        <div class="survey-questions">
+                            <i class="fas fa-question-circle"></i> Questions: ${survey.questions}
+                        </div>
+                        ${survey.payout ? `<div class="survey-payout">Payout: Ksh ${survey.payout}</div>` : ''}
+                    </div>
+                    <button class="start-btn ${isCompleted ? 'completed' : ''} ${isLocked ? 'locked' : ''}" 
+                            data-index="${index}" 
+                            ${isCompleted || isLocked ? 'disabled' : ''}>
+                        ${isCompleted ? 'Completed' : isLocked ? 'Upgrade Required' : 'Start Survey'}
+                    </button>
+                `;
+                
+                surveysContainer.appendChild(card);
+            });
+            
+            // Add event listeners to start buttons
+            document.querySelectorAll('.start-btn:not(.completed):not(.locked)').forEach(button => {
+                button.addEventListener('click', function() {
+                    const surveyIndex = parseInt(this.getAttribute('data-index'));
+                    startSurvey(surveyIndex);
+                });
+            });
+            
+            // Add event listeners to locked buttons
+            document.querySelectorAll('.start-btn.locked').forEach(button => {
+                button.addEventListener('click', function() {
+                    showUpgradeModal();
+                });
+            });
+        }
+
+        // Function to start a survey
+        function startSurvey(surveyIndex) {
+            currentSurvey = surveys[surveyIndex];
+            currentQuestionIndex = 0;
+            userAnswers = new Array(currentSurvey.questionsData.length).fill(null);
+            
+            modalTitle.textContent = currentSurvey.title;
+            modalSubtitle.textContent = `Complete all questions to earn Ksh ${currentSurvey.payout}`;
+            
+            showQuestion();
+            updateProgressBar();
+            
+            surveyModal.style.display = 'block';
+        }
+
+        // Function to show the current question
+        function showQuestion() {
+            const question = currentSurvey.questionsData[currentQuestionIndex];
+            questionText.textContent = question.question;
+            
+            optionsContainer.innerHTML = '';
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                if (userAnswers[currentQuestionIndex] === index) {
+                    optionElement.classList.add('selected');
+                }
+                optionElement.textContent = option;
+                optionElement.addEventListener('click', () => selectOption(index));
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            // Update navigation buttons
+            prevButton.disabled = currentQuestionIndex === 0;
+            nextButton.textContent = currentQuestionIndex === currentSurvey.questionsData.length - 1 ? 'Finish' : 'Next';
+        }
+
+        // Function to select an option
+        function selectOption(optionIndex) {
+            userAnswers[currentQuestionIndex] = optionIndex;
+            showQuestion(); // Refresh to show selection
+        }
+
+        // Function to update progress bar
+        function updateProgressBar() {
+            const progress = ((currentQuestionIndex + 1) / currentSurvey.questionsData.length) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        // Function to go to the next question
+        function nextQuestion() {
+            if (userAnswers[currentQuestionIndex] === null) {
+                alert('Please select an answer before proceeding.');
+                return;
+            }
+            
+            if (currentQuestionIndex < currentSurvey.questionsData.length - 1) {
+                currentQuestionIndex++;
+                showQuestion();
+                updateProgressBar();
+            } else {
+                // Survey completed
+                completeSurvey();
+            }
+        }
+
+        // Function to go to the previous question
+        function prevQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                showQuestion();
+                updateProgressBar();
+            }
+        }
+
+        // Function to complete the survey
+        function completeSurvey() {
+            questionScreen.style.display = 'none';
+            completionScreen.style.display = 'block';
+            earnedAmount.textContent = `+Ksh ${currentSurvey.payout}`;
+            
+            // Add payout to balance
+            accountBalance += currentSurvey.payout;
+            balanceDisplay.textContent = accountBalance;
+            
+            // Mark survey as completed
+            if (!completedSurveys.includes(currentSurvey.id)) {
+                completedSurveys.push(currentSurvey.id);
+                surveysCompletedToday++;
+                completedCountDisplay.textContent = surveysCompletedToday;
+            }
+        }
+
+        // Function to finish the survey
+        function finishSurvey() {
+            surveyModal.style.display = 'none';
+            questionScreen.style.display = 'block';
+            completionScreen.style.display = 'none';
+            
+            // Regenerate survey cards to update status
+            generateSurveyCards();
+            
+            // Show completion message
+            alert(`Survey completed! You've earned Ksh ${currentSurvey.payout}. Your new balance is Ksh ${accountBalance}.`);
+        }
+
+        // Function to show upgrade modal
+        function showUpgradeModal() {
+            upgradeModal.style.display = 'block';
+        }
+
+        // Function to update time
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            document.getElementById('current-time').textContent = timeString;
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load completed surveys from localStorage if available
+            const savedCompletedSurveys = localStorage.getItem('completedSurveys');
+            if (savedCompletedSurveys) {
+                completedSurveys = JSON.parse(savedCompletedSurveys);
+            }
+            
+            const savedBalance = localStorage.getItem('accountBalance');
+            if (savedBalance) {
+                accountBalance = parseInt(savedBalance);
+                balanceDisplay.textContent = accountBalance;
+            }
+            
+            const savedSurveysCompletedToday = localStorage.getItem('surveysCompletedToday');
+            if (savedSurveysCompletedToday) {
+                // Check if it's a new day
+                const lastCompletedDate = localStorage.getItem('lastCompletedDate');
+                const today = new Date().toDateString();
+                
+                if (lastCompletedDate === today) {
+                    surveysCompletedToday = parseInt(savedSurveysCompletedToday);
+                } else {
+                    surveysCompletedToday = 0;
+                    localStorage.setItem('lastCompletedDate', today);
+                }
+                
+                completedCountDisplay.textContent = surveysCompletedToday;
+            }
+            
+            generateSurveyCards();
+            updateTime();
+            setInterval(updateTime, 60000);
+            
+            // Modal close buttons
+            closeModal.addEventListener('click', function() {
+                surveyModal.style.display = 'none';
+            });
+            
+            closeUpgradeModal.addEventListener('click', function() {
+                upgradeModal.style.display = 'none';
+            });
+            
+            // Navigation buttons
+            prevButton.addEventListener('click', prevQuestion);
+            nextButton.addEventListener('click', nextQuestion);
+            finishButton.addEventListener('click', finishSurvey);
+            
+            // Upgrade button
+            upgradeButton.addEventListener('click', function() {
+                alert('Redirecting to premium upgrade page...');
+                upgradeModal.style.display = 'none';
+            });
+            
+            // Close modals when clicking outside
+            window.addEventListener('click', function(event) {
+                if (event.target === surveyModal) {
+                    surveyModal.style.display = 'none';
+                }
+                if (event.target === upgradeModal) {
+                    upgradeModal.style.display = 'none';
+                }
+            });
+            
+            // Save state when leaving the page
+            window.addEventListener('beforeunload', function() {
+                localStorage.setItem('completedSurveys', JSON.stringify(completedSurveys));
+                localStorage.setItem('accountBalance', accountBalance.toString());
+                localStorage.setItem('surveysCompletedToday', surveysCompletedToday.toString());
+                localStorage.setItem('lastCompletedDate', new Date().toDateString());
+            });
+        });
+    </script>
+</body>
+  </html>
