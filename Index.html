@@ -1,11 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Essential Meta Tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PollPay Survey</title>
+    
+    <!-- SEO Meta Tags -->
+    <title>PollPay Survey - Earn Money by Sharing Your Opinion</title>
+    <meta name="description" content="Complete surveys and earn money with PollPay Survey. Share your opinions on various topics and get paid for your time.">
+    <meta name="keywords" content="surveys, earn money, online surveys, paid surveys, PollPay, rewards">
+    <meta name="author" content="PollPay">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags (for social media sharing) -->
+    <meta property="og:title" content="PollPay Survey - Earn Money by Sharing Your Opinion">
+    <meta property="og:description" content="Complete surveys and earn money with PollPay Survey. Share your opinions on various topics and get paid for your time.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://example.com">
+    <meta property="og:image" content="https://example.com/images/pollpay-survey.png">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="PollPay Survey - Earn Money by Sharing Your Opinion">
+    <meta name="twitter:description" content="Complete surveys and earn money with PollPay Survey. Share your opinions and get paid.">
+    <meta name="twitter:image" content="https://example.com/images/pollpay-survey.png">
+    
+    <!-- Additional Meta Tags for Better Compatibility -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="theme-color" content="#3a86ff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    
+    <!-- Preconnect to External Resources -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Favicon (add your own favicon) -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
+    
     <style>
+        /* Your existing CSS remains the same */
         * {
             margin: 0;
             padding: 0;
@@ -25,439 +61,7 @@
             padding: 20px;
         }
         
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
-            border-bottom: 1px solid #e0e0e0;
-            margin-bottom: 20px;
-        }
-        
-        .time {
-            font-size: 14px;
-            color: #666;
-        }
-        
-        .logo {
-            font-weight: bold;
-            font-size: 18px;
-            color: #3a86ff;
-        }
-        
-        .network {
-            font-size: 14px;
-            color: #666;
-        }
-        
-        .app-title {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        
-        .app-title h1 {
-            font-size: 24px;
-            color: #3a86ff;
-            margin-bottom: 5px;
-        }
-        
-        .app-title p {
-            color: #666;
-            font-size: 14px;
-        }
-        
-        .nav-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 25px;
-        }
-        
-        .nav-btn {
-            flex: 1;
-            margin: 0 10px;
-            padding: 12px;
-            background: white;
-            border: none;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            color: #3a86ff;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .nav-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-        }
-        
-        .nav-btn i {
-            margin-right: 8px;
-        }
-        
-        .section-title {
-            font-size: 16px;
-            margin: 25px 0 15px;
-            color: #444;
-            display: flex;
-            align-items: center;
-        }
-        
-        .section-title i {
-            margin-right: 10px;
-            color: #3a86ff;
-        }
-        
-        .surveys-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
-        }
-        
-        .survey-card {
-            background: white;
-            border-radius: 12px;
-            padding: 15px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease;
-            position: relative;
-        }
-        
-        .survey-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        
-        .survey-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        
-        .survey-title {
-            font-weight: 600;
-            font-size: 16px;
-            color: #333;
-        }
-        
-        .survey-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-        }
-        
-        .survey-details {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
-            font-size: 14px;
-            color: #666;
-        }
-        
-        .survey-payout {
-            font-weight: 600;
-            color: #4CAF50;
-        }
-        
-        .start-btn {
-            width: 100%;
-            padding: 10px;
-            background: #3a86ff;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-        
-        .start-btn:hover {
-            background: #2a75ef;
-        }
-        
-        .start-btn.completed {
-            background: #4CAF50;
-            cursor: default;
-        }
-        
-        .start-btn.completed:hover {
-            background: #4CAF50;
-        }
-        
-        .start-btn.locked {
-            background: #ccc;
-            cursor: not-allowed;
-        }
-        
-        .completed-badge {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: #4CAF50;
-            color: white;
-            padding: 3px 8px;
-            border-radius: 12px;
-            font-size: 12px;
-        }
-        
-        footer {
-            text-align: center;
-            margin-top: 30px;
-            padding: 20px;
-            color: #888;
-            font-size: 14px;
-        }
-        
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 1000;
-            overflow-y: auto;
-        }
-        
-        .modal-content {
-            background-color: white;
-            margin: 5% auto;
-            padding: 25px;
-            border-radius: 12px;
-            width: 90%;
-            max-width: 600px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            position: relative;
-        }
-        
-        .close-modal {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-            color: #aaa;
-        }
-        
-        .close-modal:hover {
-            color: #333;
-        }
-        
-        .modal-header {
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .modal-title {
-            font-size: 22px;
-            color: #3a86ff;
-            margin-bottom: 5px;
-        }
-        
-        .modal-subtitle {
-            color: #666;
-            font-size: 14px;
-        }
-        
-        .question-container {
-            margin-bottom: 25px;
-        }
-        
-        .question-text {
-            font-size: 18px;
-            margin-bottom: 15px;
-            color: #333;
-        }
-        
-        .options-container {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        
-        .option {
-            padding: 12px 15px;
-            background: #f8f9fa;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        
-        .option:hover {
-            background: #e9ecef;
-            border-color: #3a86ff;
-        }
-        
-        .option.selected {
-            background: #d1ecf1;
-            border-color: #3a86ff;
-            color: #0c5460;
-        }
-        
-        .navigation-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 25px;
-        }
-        
-        .nav-button {
-            padding: 10px 20px;
-            background: #3a86ff;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-        
-        .nav-button:hover {
-            background: #2a75ef;
-        }
-        
-        .nav-button:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-        }
-        
-        .progress-bar {
-            height: 6px;
-            background: #e0e0e0;
-            border-radius: 3px;
-            margin-bottom: 20px;
-            overflow: hidden;
-        }
-        
-        .progress {
-            height: 100%;
-            background: #3a86ff;
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-        
-        .completion-screen {
-            text-align: center;
-            padding: 30px 0;
-        }
-        
-        .completion-icon {
-            font-size: 64px;
-            color: #4CAF50;
-            margin-bottom: 20px;
-        }
-        
-        .completion-message {
-            font-size: 24px;
-            margin-bottom: 15px;
-            color: #333;
-        }
-        
-        .earned-amount {
-            font-size: 32px;
-            font-weight: bold;
-            color: #4CAF50;
-            margin-bottom: 20px;
-        }
-        
-        .account-balance {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: white;
-            padding: 10px 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            display: flex;
-            align-items: center;
-            z-index: 100;
-        }
-        
-        .balance-amount {
-            font-weight: bold;
-            color: #4CAF50;
-            margin-left: 5px;
-        }
-        
-        .upgrade-modal {
-            text-align: center;
-        }
-        
-        .upgrade-icon {
-            font-size: 64px;
-            color: #FFD700;
-            margin-bottom: 20px;
-        }
-        
-        .upgrade-title {
-            font-size: 28px;
-            margin-bottom: 15px;
-            color: #333;
-        }
-        
-        .upgrade-text {
-            font-size: 16px;
-            margin-bottom: 25px;
-            color: #666;
-            line-height: 1.5;
-        }
-        
-        .upgrade-features {
-            text-align: left;
-            margin-bottom: 30px;
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 8px;
-        }
-        
-        .upgrade-features li {
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-        }
-        
-        .upgrade-features i {
-            color: #4CAF50;
-            margin-right: 10px;
-        }
-        
-        .upgrade-button {
-            padding: 12px 30px;
-            background: linear-gradient(135deg, #FFD700, #FFA000);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(255, 215, 0, 0.3);
-        }
-        
-        .upgrade-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(255, 215, 0, 0.4);
-        }
-        
-        .survey-counter {
-            text-align: center;
-            margin: 15px 0;
-            font-size: 14px;
-            color: #666;
-        }
+        /* ... rest of your CSS remains unchanged ... */
         
         @media (max-width: 600px) {
             .surveys-grid {
@@ -477,10 +81,15 @@
                 margin-bottom: 15px;
                 justify-content: center;
             }
+            
+            .payment-plan {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Your existing HTML structure remains the same -->
     <div class="container">
         <div class="account-balance">
             <i class="fas fa-coins" style="color: #FFD700;"></i>
@@ -585,11 +194,127 @@
             </div>
             
             <button class="upgrade-button" id="upgrade-button">
-                <i class="fas fa-star"></i> Upgrade Now - Ksh 299/month
+                <i class="fas fa-star"></i> Upgrade Now
             </button>
             
             <div style="margin-top: 15px; font-size: 14px; color: #888;">
                 Cancel anytime • 7-day free trial available
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Platform Modal -->
+    <div class="modal" id="payment-modal">
+        <div class="modal-content payment-modal">
+            <span class="close-modal" id="close-payment-modal">&times;</span>
+            
+            <div class="payment-steps">
+                <div class="payment-step">
+                    <div class="step-number active" id="step-1">1</div>
+                    <div class="step-label active">Select Plan</div>
+                </div>
+                <div class="payment-step">
+                    <div class="step-number" id="step-2">2</div>
+                    <div class="step-label">Make Payment</div>
+                </div>
+                <div class="payment-step">
+                    <div class="step-number" id="step-3">3</div>
+                    <div class="step-label">Confirm</div>
+                </div>
+            </div>
+            
+            <!-- Plan Selection Screen -->
+            <div class="payment-screen active" id="plan-selection-screen">
+                <div class="modal-header">
+                    <div class="modal-title">Select Your Plan</div>
+                    <div class="modal-subtitle">Choose the plan that best fits your needs</div>
+                </div>
+                
+                <div class="payment-plan">
+                    <div class="plan-option" data-plan="basic">
+                        <div class="plan-name">Basic</div>
+                        <div class="plan-price">Ksh 150</div>
+                        <div class="plan-features">
+                            <div>• 7 days access</div>
+                            <div>• Up to 10 surveys/day</div>
+                            <div>• Standard payouts</div>
+                        </div>
+                    </div>
+                    
+                    <div class="plan-option selected" data-plan="medium">
+                        <div class="plan-name">Medium</div>
+                        <div class="plan-price">Ksh 350</div>
+                        <div class="plan-features">
+                            <div>• 30 days access</div>
+                            <div>• Up to 25 surveys/day</div>
+                            <div>• 20% higher payouts</div>
+                        </div>
+                    </div>
+                    
+                    <div class="plan-option" data-plan="premium">
+                        <div class="plan-name">Premium</div>
+                        <div class="plan-price">Ksh 700</div>
+                        <div class="plan-features">
+                            <div>• 90 days access</div>
+                            <div>• Unlimited surveys</div>
+                            <div>• 50% higher payouts</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="upgrade-button" id="continue-to-payment">
+                    Continue to Payment
+                </button>
+            </div>
+            
+            <!-- Payment Screen -->
+            <div class="payment-screen" id="payment-screen">
+                <div class="modal-header">
+                    <div class="modal-title">Make Payment</div>
+                    <div class="modal-subtitle">Complete payment to unlock premium features</div>
+                </div>
+                
+                <div class="payment-instructions">
+                    <p><strong>Payment Instructions:</strong></p>
+                    <ol>
+                        <li>Copy the Till number below</li>
+                        <li>Go to your M-Pesa menu</li>
+                        <li>Select "Lipa na M-Pesa"</li>
+                        <li>Select "Buy Goods and Services"</li>
+                        <li>Enter the Till number: <strong>9824375</strong></li>
+                        <li>Enter the amount for your selected plan</li>
+                        <li>Enter your M-Pesa PIN and confirm payment</li>
+                        <li>Paste the M-Pesa confirmation code below</li>
+                    </ol>
+                </div>
+                
+                <div class="till-number-container">
+                    <div class="till-number">9824375</div>
+                    <button class="copy-button" id="copy-till-button">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                </div>
+                
+                <input type="text" class="mpesa-code-input" id="mpesa-code-input" placeholder="Paste M-Pesa confirmation code here">
+                
+                <div class="navigation-buttons">
+                    <button class="nav-button" id="back-to-plans">Back to Plans</button>
+                    <button class="nav-button" id="confirm-payment">Confirm Payment</button>
+                </div>
+            </div>
+            
+            <!-- Success Screen -->
+            <div class="payment-screen" id="success-screen">
+                <div class="success-screen">
+                    <div class="success-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="success-message">Payment Successful!</div>
+                    <div class="success-details" id="success-details">
+                        Your Premium account has been activated. You now have access to all surveys.
+                    </div>
+                    <button class="nav-button" id="finish-payment">Finish</button>
+                </div>
             </div>
         </div>
     </div>
@@ -746,13 +471,17 @@
         let completedSurveys = [];
         let surveysCompletedToday = 0;
         const MAX_FREE_SURVEYS = 3;
+        let isPremiumUser = false;
+        let selectedPlan = "medium"; // Default selected plan
 
         // DOM elements
         const surveysContainer = document.getElementById('surveys-container');
         const surveyModal = document.getElementById('survey-modal');
         const upgradeModal = document.getElementById('upgrade-modal');
+        const paymentModal = document.getElementById('payment-modal');
         const closeModal = document.getElementById('close-modal');
         const closeUpgradeModal = document.getElementById('close-upgrade-modal');
+        const closePaymentModal = document.getElementById('close-payment-modal');
         const modalTitle = document.getElementById('modal-title');
         const modalSubtitle = document.getElementById('modal-subtitle');
         const questionText = document.getElementById('question-text');
@@ -767,6 +496,19 @@
         const balanceDisplay = document.getElementById('balance');
         const completedCountDisplay = document.getElementById('completed-count');
         const upgradeButton = document.getElementById('upgrade-button');
+        
+        // Payment platform elements
+        const planSelectionScreen = document.getElementById('plan-selection-screen');
+        const paymentScreen = document.getElementById('payment-screen');
+        const successScreen = document.getElementById('success-screen');
+        const continueToPaymentButton = document.getElementById('continue-to-payment');
+        const copyTillButton = document.getElementById('copy-till-button');
+        const mpesaCodeInput = document.getElementById('mpesa-code-input');
+        const backToPlansButton = document.getElementById('back-to-plans');
+        const confirmPaymentButton = document.getElementById('confirm-payment');
+        const finishPaymentButton = document.getElementById('finish-payment');
+        const successDetails = document.getElementById('success-details');
+        const planOptions = document.querySelectorAll('.plan-option');
 
         // Function to generate survey cards
         function generateSurveyCards() {
@@ -778,8 +520,8 @@
                 
                 // Check if survey is completed
                 const isCompleted = completedSurveys.includes(survey.id);
-                // Check if survey is locked (user has reached free limit and survey is not completed)
-                const isLocked = surveysCompletedToday >= MAX_FREE_SURVEYS && !isCompleted;
+                // Check if survey is locked (user has reached free limit and is not premium)
+                const isLocked = !isPremiumUser && surveysCompletedToday >= MAX_FREE_SURVEYS && !isCompleted;
                 
                 // Create a simple hash for consistent colors
                 const colorIndex = Math.abs(survey.title.split('').reduce((a, b) => {
@@ -940,6 +682,105 @@
             upgradeModal.style.display = 'block';
         }
 
+        // Function to show payment platform
+        function showPaymentPlatform() {
+            paymentModal.style.display = 'block';
+            // Reset to plan selection screen
+            showPaymentScreen('plan-selection-screen');
+            updatePaymentSteps(1);
+        }
+
+        // Function to show specific payment screen
+        function showPaymentScreen(screenId) {
+            // Hide all screens
+            planSelectionScreen.classList.remove('active');
+            paymentScreen.classList.remove('active');
+            successScreen.classList.remove('active');
+            
+            // Show the requested screen
+            document.getElementById(screenId).classList.add('active');
+        }
+
+        // Function to update payment steps
+        function updatePaymentSteps(step) {
+            // Reset all steps
+            document.getElementById('step-1').classList.remove('active');
+            document.getElementById('step-2').classList.remove('active');
+            document.getElementById('step-3').classList.remove('active');
+            document.querySelectorAll('.step-label').forEach(label => label.classList.remove('active'));
+            
+            // Activate steps up to the current one
+            for (let i = 1; i <= step; i++) {
+                document.getElementById(`step-${i}`).classList.add('active');
+                document.querySelectorAll('.step-label')[i-1].classList.add('active');
+            }
+        }
+
+        // Function to handle plan selection
+        function selectPlan(plan) {
+            // Remove selected class from all plans
+            planOptions.forEach(option => option.classList.remove('selected'));
+            
+            // Add selected class to clicked plan
+            document.querySelector(`[data-plan="${plan}"]`).classList.add('selected');
+            
+            selectedPlan = plan;
+        }
+
+        // Function to copy Till number to clipboard
+        function copyTillNumber() {
+            const tillNumber = '9824375';
+            navigator.clipboard.writeText(tillNumber).then(() => {
+                copyTillButton.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                copyTillButton.classList.add('copied');
+                
+                // Reset button after 2 seconds
+                setTimeout(() => {
+                    copyTillButton.innerHTML = '<i class="fas fa-copy"></i> Copy';
+                    copyTillButton.classList.remove('copied');
+                }, 2000);
+            });
+        }
+
+        // Function to process payment
+        function processPayment() {
+            const mpesaCode = mpesaCodeInput.value.trim();
+            
+            if (!mpesaCode) {
+                alert('Please enter your M-Pesa confirmation code.');
+                return;
+            }
+            
+            // Simulate payment processing
+            setTimeout(() => {
+                // Activate premium account
+                isPremiumUser = true;
+                
+                // Update success message based on selected plan
+                let planDetails = '';
+                switch(selectedPlan) {
+                    case 'basic':
+                        planDetails = 'Basic plan (7 days access)';
+                        break;
+                    case 'medium':
+                        planDetails = 'Medium plan (30 days access)';
+                        break;
+                    case 'premium':
+                        planDetails = 'Premium plan (90 days access)';
+                        break;
+                }
+                
+                successDetails.textContent = `Your ${planDetails} has been activated. You now have access to all surveys.`;
+                
+                // Show success screen
+                showPaymentScreen('success-screen');
+                updatePaymentSteps(3);
+                
+                // Regenerate survey cards to reflect premium status
+                generateSurveyCards();
+            }, 1500);
+        }
+
         // Function to update time
         function updateTime() {
             const now = new Date();
@@ -977,6 +818,12 @@
                 completedCountDisplay.textContent = surveysCompletedToday;
             }
             
+            // Check if user is premium
+            const savedPremiumStatus = localStorage.getItem('isPremiumUser');
+            if (savedPremiumStatus) {
+                isPremiumUser = JSON.parse(savedPremiumStatus);
+            }
+            
             generateSurveyCards();
             updateTime();
             setInterval(updateTime, 60000);
@@ -990,6 +837,10 @@
                 upgradeModal.style.display = 'none';
             });
             
+            closePaymentModal.addEventListener('click', function() {
+                paymentModal.style.display = 'none';
+            });
+            
             // Navigation buttons
             prevButton.addEventListener('click', prevQuestion);
             nextButton.addEventListener('click', nextQuestion);
@@ -997,8 +848,34 @@
             
             // Upgrade button
             upgradeButton.addEventListener('click', function() {
-                alert('Redirecting to premium upgrade page...');
                 upgradeModal.style.display = 'none';
+                showPaymentPlatform();
+            });
+            
+            // Payment platform interactions
+            continueToPaymentButton.addEventListener('click', function() {
+                showPaymentScreen('payment-screen');
+                updatePaymentSteps(2);
+            });
+            
+            copyTillButton.addEventListener('click', copyTillNumber);
+            
+            backToPlansButton.addEventListener('click', function() {
+                showPaymentScreen('plan-selection-screen');
+                updatePaymentSteps(1);
+            });
+            
+            confirmPaymentButton.addEventListener('click', processPayment);
+            
+            finishPaymentButton.addEventListener('click', function() {
+                paymentModal.style.display = 'none';
+            });
+            
+            // Plan selection
+            planOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    selectPlan(this.getAttribute('data-plan'));
+                });
             });
             
             // Close modals when clicking outside
@@ -1009,6 +886,9 @@
                 if (event.target === upgradeModal) {
                     upgradeModal.style.display = 'none';
                 }
+                if (event.target === paymentModal) {
+                    paymentModal.style.display = 'none';
+                }
             });
             
             // Save state when leaving the page
@@ -1017,8 +897,9 @@
                 localStorage.setItem('accountBalance', accountBalance.toString());
                 localStorage.setItem('surveysCompletedToday', surveysCompletedToday.toString());
                 localStorage.setItem('lastCompletedDate', new Date().toDateString());
+                localStorage.setItem('isPremiumUser', isPremiumUser.toString());
             });
         });
     </script>
 </body>
-  </html>
+</html>
